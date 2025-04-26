@@ -1,40 +1,30 @@
-# Python virtual environment
 .venv/
 env/
 venv/
 
-# Python cache
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 
-# Editor/IDE settings
 .vscode/
 .idea/
 *.sublime-project
 *.sublime-workspace
 
-# Environment variables
 .env
 
-# MacOS system files
 .DS_Store
 
-# Jupyter Notebook checkpoints (if ever used)
 .ipynb_checkpoints/
 
-# pytest cache
 .pytest_cache/
 
-# mypy / typing cache
 .mypy_cache/
 
-# coverage reports
 htmlcov/
 .coverage
 
-# build artifacts
 build/
 dist/
 *.egg-info/
