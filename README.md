@@ -1,1 +1,1 @@
-# Go Server
+# simply ask GPT
