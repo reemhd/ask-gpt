@@ -14,23 +14,35 @@ def main():
 
     model = "gpt-4o"
 
+    messages = []
+
     print(f"Using model: {model}")
-    print("Type your message (or type ':exit' to quit)\n")
+    print("Type your message (or type '\q' to quit)\n")
 
     while True:
         user_input = input("You: ")
 
-        if user_input.strip() == ":exit":
+        if user_input.strip() == "\q":
             print("Exiting...")
+            print("Thanks for using ask-gpt")
             break
+        
+        # Collect user responses
+        messages.append({"role": "user", "content": user_input})
 
-        response = client.chat.completions.create(
-            model=model,
-            messages=[{"role": "developer", "content": user_input}]
-        )
-
-        assistant_reply = response.choices[0].message.content
-        print(f"GPT: {assistant_reply}\n")
+        try:
+            response = client.chat.completions.create(
+                model=model,
+                messages=messages
+            )
+            assistant_reply = response.choices[0].message.content
+            # Add gpt responses
+            messages.append({"role": "assistant", "content": assistant_reply})
+            print(f"GPT: {assistant_reply}\n")
+        except Exception as e:
+            print(f"Error during OpenAI request: {e}")
+            continue
+        
 
 if __name__ == "__main__":
     main()
