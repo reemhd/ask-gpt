@@ -25,3 +25,9 @@ To quit the chat
 ```
 \q
 ```
+
+## Features
+- Chat directly with OpenAI models
+- Maintain conversation history
+- Choose different models (coming soon)
+- Save chat sessions (coming soon)
