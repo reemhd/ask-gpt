@@ -12,7 +12,7 @@ console = Console()
 def main():
 	api_key = os.getenv("OPENAI_API_KEY")
 	if not api_key:
-		print("Error: OPENAI_API_KEY not set")
+		console.print("[red bold]Error[/red bold]: OPENAI_API_KEY not set")
 		return
 
 	client = OpenAI(api_key=api_key)
@@ -24,8 +24,9 @@ def main():
 	console.print(f"\n[bold blue]ask-gpt[/bold blue] | [bold yellow]{model}[/bold yellow]\n")
 	help_text = """Type your message or,
 Type [red]'\\q'[/red] to [bold]quit[/bold]
-Type [green]'\\s'[/green] to [bold]save[/bold]
-Type [blue]'\\l'[/blue] to [bold]load[/bold]
+Type [green]'\\s <filename>'[/green] to [bold]save[/bold]
+Type [blue]'\\l <filename>'[/blue] to [bold]load[/bold]
+Type [white]'\\c'[/white] to [bold]clear chat history[/bold]
 """
 	console.print(help_text)
 
@@ -68,13 +69,19 @@ Type [blue]'\\l'[/blue] to [bold]load[/bold]
 				)
 			assistant_reply = response.choices[0].message.content
 		except Exception as e:
-			print(f"Error during OpenAI request: {e}")
+			print(f"[red bold]Error[/red bold] during OpenAI request: {e}")
 			continue
 
 		# Add gpt responses
 		messages.append({"role": "assistant", "content": assistant_reply})
+
+		# Render markdown
+		with console.capture() as capture:
+			console.print(Markdown(assistant_reply), markup=True)
+		response = capture.get()
+
 		console.print("[blue bold]GPT[/blue bold]: ", end="")
-		console.print(Markdown(assistant_reply), highlight=True)
+		print(response.strip())
 		console.line()
 
 if __name__ == "__main__":

@@ -1,5 +1,8 @@
 import json
 import os
+from rich.console import Console
+
+console = Console()
 
 def save_session(messages, filename):
 	"""
@@ -10,9 +13,9 @@ def save_session(messages, filename):
 	try:
 		with open(filename, "w", encoding="utf-8") as f:
 			json.dump(messages, f, indent=2, ensure_ascii=False)
-		print(f"[INFO] Chat saved to {filename}")
+		console.print(f"[blue bold]INFO[/blue bold]: Chat saved to {filename}")
 	except Exception as e:
-		print(f"[ERROR] Failed to save chat: {e}")
+		console.print(f"[red bold]ERROR[/red bold]: Failed to save chat: {e}")
 
 def load_session(filename):
 	"""
@@ -21,13 +24,13 @@ def load_session(filename):
 	if not filename.endswith(".json"):
 		filename += ".json"
 	if not os.path.exists(filename):
-		print(f"[ERROR] File '{filename}' not found.")
+		console.print(f"[red bold]ERROR[/red bold]: File '{filename}' not found.")
 		return []
 	try:
 		with open(filename, "r", encoding="utf-8") as f:
 			messages = json.load(f)
-		print(f"[INFO] Loaded {len(messages)} messages from {filename}")
+		console.print(f"[blue bold]INFO[/blue bold]: Loaded {len(messages)} messages from {filename}")
 		return messages
 	except Exception as e:
-		print(f"[ERROR] Failed to load chat: {e}")
+		console.print(f"[red bold]ERROR[/red bold]: Failed to load chat: {e}")
 		return []

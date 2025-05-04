@@ -27,12 +27,12 @@ To quit the chat
 
 To save current chat to a JSON file
 ```
-\s filename
+\s <filename>
 ```
 
 To load a previous chat session from a file
 ```
-\l filename
+\l <filename>
 ```
 
 To clear chat history and start again
