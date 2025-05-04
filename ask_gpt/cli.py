@@ -2,8 +2,12 @@ import os
 from openai import OpenAI
 from dotenv import load_dotenv
 from ask_gpt.session import save_session, load_session
+from ask_gpt import system_prompts
+from rich.console import Console
+from rich.markdown import Markdown
 
 load_dotenv()
+console = Console()
 
 def main():
 	api_key = os.getenv("OPENAI_API_KEY")
@@ -15,13 +19,18 @@ def main():
 
 	model = "gpt-4o"
 
-	messages = []
+	messages = system_prompts.initial_context.copy()
 
-	print(f"ask-gpt | model: {model}")
-	print("Type your message or,\nType '\\q' to quit\nType '\\s' to save\nType '\\l' to load\n")
+	console.print(f"\n[bold blue]ask-gpt[/bold blue] | [bold yellow]{model}[/bold yellow]\n")
+	help_text = """Type your message or,
+Type [red]'\\q'[/red] to [bold]quit[/bold]
+Type [green]'\\s'[/green] to [bold]save[/bold]
+Type [blue]'\\l'[/blue] to [bold]load[/bold]
+"""
+	console.print(help_text)
 
 	while True:
-		user_input = input("You: ").strip()
+		user_input = console.input("[green bold]You[/green bold]: ").strip()
 		if user_input.startswith("\\"):
 			parts = user_input.split()
 			command = parts[0]
@@ -39,12 +48,12 @@ def main():
 				continue
 
 			elif command == "\\c":
-				messages = []
+				messages = system_prompts.initial_context.copy()
 				print("Chat history cleared.")
 				continue
 
 			else:
-				print("Unknown command. Use :save <file>, :load <file>, :exit")
+				console.print(f"Unknown command. {help_text}")
 				continue
 		
 		# Collect user responses
@@ -62,8 +71,9 @@ def main():
 
 		# Add gpt responses
 		messages.append({"role": "assistant", "content": assistant_reply})
-		print(f"GPT: {assistant_reply}\n")
-		
+		console.print("[blue bold]GPT[/blue bold]: ", end="")
+		console.print(Markdown(assistant_reply), highlight=True)
+		console.line()
 
 if __name__ == "__main__":
 	main()
