@@ -1,14 +1,13 @@
 # simply ask GPT
-Clone the repo and create a virtual env
-bash
-```
-python -m venv .venv
-source .venv/bin/activate
-```
 
-Install dependencies
+A lightweight Python CLI to chat with OpenAI's GPT models.
+
+## Setup
+Clone the repo and install [Poetry](https://python-poetry.org/docs/#installation)  
+
+Install dependencies:
 ```
-pip install -r requirements.txt
+poetry install
 ```
 
 Copy the example environment file and add your OpenAI API key
@@ -18,7 +17,7 @@ cp .env.example .env
 
 To start chatting
 ```
-python cli.py
+poetry run ask-gpt
 ```
 
 To quit the chat

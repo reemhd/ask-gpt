@@ -17,12 +17,12 @@ def main():
     messages = []
 
     print(f"Using model: {model}")
-    print("Type your message (or type '\q' to quit)\n")
+    print("Type your message (or type '\\q' to quit)\n")
 
     while True:
         user_input = input("You: ")
 
-        if user_input.strip() == "\q":
+        if user_input.strip() == "\\q":
             print("Exiting...")
             print("Thanks for using ask-gpt")
             break
