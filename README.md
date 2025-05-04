@@ -2,6 +2,8 @@
 
 A lightweight Python CLI to chat with OpenAI's GPT models.
 
+<img src="public/screenshot.png" alt="cli screenshot" width="500px"/>
+
 ## Setup
 Clone the repo and install [Poetry](https://python-poetry.org/docs/#installation)  
 
