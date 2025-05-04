@@ -60,10 +60,12 @@ Type [blue]'\\l'[/blue] to [bold]load[/bold]
 		messages.append({"role": "user", "content": user_input})
 
 		try:
-			response = client.chat.completions.create(
-				model=model,
-				messages=messages
-			)
+			with console.status("[bold blue]Thinking...[/bold blue]", spinner="dots", spinner_style="blue"):
+				# Send the request to OpenAI
+				response = client.chat.completions.create(
+					model=model,
+					messages=messages
+				)
 			assistant_reply = response.choices[0].message.content
 		except Exception as e:
 			print(f"Error during OpenAI request: {e}")
