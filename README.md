@@ -25,8 +25,23 @@ To quit the chat
 \q
 ```
 
+To save current chat to a JSON file
+```
+\s <filename>
+```
+
+To load a previous chat session from a file
+```
+\l <filename>
+```
+
+To clear chat history and start again
+```
+\c
+```
+
 ## Features
 - Chat directly with OpenAI models
 - Maintain conversation history
+- Save, load and clear chat sessions
 - Choose different models (coming soon)
-- Save chat sessions (coming soon)
