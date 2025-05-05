@@ -7,7 +7,7 @@ A lightweight Python CLI to chat with OpenAI's GPT models.
 ## Setup
 Clone the repo and install [Poetry](https://python-poetry.org/docs/#installation)  
 
-Install dependencies:
+Install dependencies
 ```
 poetry install
 ```
